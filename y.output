@@ -1,0 +1,300 @@
+Terminals unused in grammar
+
+    For
+    To
+    EndFor
+    Assign
+    '-'
+    '+'
+    '*'
+    '/'
+    UMINUS
+
+
+Grammar
+
+    0 $accept: Goal $end
+
+    1 Goal: Program NAME Begin Stmt_list End
+
+    2 Stmt_list: Stmt
+    3          | Stmt Stmt_list
+
+    4 Stmt: Dec_stmt
+
+    5 Dec_stmt: Declare Var_list As Type ';'
+
+    6 Var_list: NAME
+    7         | NAME ',' Var_list
+    8         | NAME '[' NUMBER ']'
+    9         | NAME '[' NUMBER ']' ',' Var_list
+
+   10 Type: Float
+   11     | Integer
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    '*' (42)
+    '+' (43)
+    ',' (44) 7 9
+    '-' (45)
+    '/' (47)
+    ';' (59) 5
+    '[' (91) 8 9
+    ']' (93) 8 9
+    error (256)
+    NAME <symp> (258) 1 6 7 8 9
+    NUMBER <dval> (259) 8 9
+    Float <type> (260) 10
+    Integer <type> (261) 11
+    Program (262) 1
+    Begin (263) 1
+    Declare (264) 5
+    As (265) 5
+    For (266)
+    To (267)
+    EndFor (268)
+    Assign (269)
+    End (270) 1
+    UMINUS (271)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (25)
+        on left: 0
+    Goal (26)
+        on left: 1
+        on right: 0
+    Stmt_list (27)
+        on left: 2 3
+        on right: 1 3
+    Stmt (28)
+        on left: 4
+        on right: 2 3
+    Dec_stmt (29)
+        on left: 5
+        on right: 4
+    Var_list (30)
+        on left: 6 7 8 9
+        on right: 5 7 9
+    Type <type> (31)
+        on left: 10 11
+        on right: 5
+
+
+State 0
+
+    0 $accept: . Goal $end
+
+    Program  shift, and go to state 1
+
+    Goal  go to state 2
+
+
+State 1
+
+    1 Goal: Program . NAME Begin Stmt_list End
+
+    NAME  shift, and go to state 3
+
+
+State 2
+
+    0 $accept: Goal . $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    1 Goal: Program NAME . Begin Stmt_list End
+
+    Begin  shift, and go to state 5
+
+
+State 4
+
+    0 $accept: Goal $end .
+
+    $default  accept
+
+
+State 5
+
+    1 Goal: Program NAME Begin . Stmt_list End
+
+    Declare  shift, and go to state 6
+
+    Stmt_list  go to state 7
+    Stmt       go to state 8
+    Dec_stmt   go to state 9
+
+
+State 6
+
+    5 Dec_stmt: Declare . Var_list As Type ';'
+
+    NAME  shift, and go to state 10
+
+    Var_list  go to state 11
+
+
+State 7
+
+    1 Goal: Program NAME Begin Stmt_list . End
+
+    End  shift, and go to state 12
+
+
+State 8
+
+    2 Stmt_list: Stmt .
+    3          | Stmt . Stmt_list
+
+    Declare  shift, and go to state 6
+
+    $default  reduce using rule 2 (Stmt_list)
+
+    Stmt_list  go to state 13
+    Stmt       go to state 8
+    Dec_stmt   go to state 9
+
+
+State 9
+
+    4 Stmt: Dec_stmt .
+
+    $default  reduce using rule 4 (Stmt)
+
+
+State 10
+
+    6 Var_list: NAME .
+    7         | NAME . ',' Var_list
+    8         | NAME . '[' NUMBER ']'
+    9         | NAME . '[' NUMBER ']' ',' Var_list
+
+    ','  shift, and go to state 14
+    '['  shift, and go to state 15
+
+    $default  reduce using rule 6 (Var_list)
+
+
+State 11
+
+    5 Dec_stmt: Declare Var_list . As Type ';'
+
+    As  shift, and go to state 16
+
+
+State 12
+
+    1 Goal: Program NAME Begin Stmt_list End .
+
+    $default  reduce using rule 1 (Goal)
+
+
+State 13
+
+    3 Stmt_list: Stmt Stmt_list .
+
+    $default  reduce using rule 3 (Stmt_list)
+
+
+State 14
+
+    7 Var_list: NAME ',' . Var_list
+
+    NAME  shift, and go to state 10
+
+    Var_list  go to state 17
+
+
+State 15
+
+    8 Var_list: NAME '[' . NUMBER ']'
+    9         | NAME '[' . NUMBER ']' ',' Var_list
+
+    NUMBER  shift, and go to state 18
+
+
+State 16
+
+    5 Dec_stmt: Declare Var_list As . Type ';'
+
+    Float    shift, and go to state 19
+    Integer  shift, and go to state 20
+
+    Type  go to state 21
+
+
+State 17
+
+    7 Var_list: NAME ',' Var_list .
+
+    $default  reduce using rule 7 (Var_list)
+
+
+State 18
+
+    8 Var_list: NAME '[' NUMBER . ']'
+    9         | NAME '[' NUMBER . ']' ',' Var_list
+
+    ']'  shift, and go to state 22
+
+
+State 19
+
+   10 Type: Float .
+
+    $default  reduce using rule 10 (Type)
+
+
+State 20
+
+   11 Type: Integer .
+
+    $default  reduce using rule 11 (Type)
+
+
+State 21
+
+    5 Dec_stmt: Declare Var_list As Type . ';'
+
+    ';'  shift, and go to state 23
+
+
+State 22
+
+    8 Var_list: NAME '[' NUMBER ']' .
+    9         | NAME '[' NUMBER ']' . ',' Var_list
+
+    ','  shift, and go to state 24
+
+    $default  reduce using rule 8 (Var_list)
+
+
+State 23
+
+    5 Dec_stmt: Declare Var_list As Type ';' .
+
+    $default  reduce using rule 5 (Dec_stmt)
+
+
+State 24
+
+    9 Var_list: NAME '[' NUMBER ']' ',' . Var_list
+
+    NAME  shift, and go to state 10
+
+    Var_list  go to state 25
+
+
+State 25
+
+    9 Var_list: NAME '[' NUMBER ']' ',' Var_list .
+
+    $default  reduce using rule 9 (Var_list)

@@ -1,0 +1,24 @@
+Program TestP
+Begin 
+Declare I as Integer;
+declare A,B,C,D,LLL[100] as float;
+FOR ( I:=1 TO 100 )
+	A:=-LLL[I]+B*D-C;
+ENDFOR
+If (A<1000) Then
+	A:= A+B;
+Else
+	B:=B+C;
+EndIf
+
+If (A==B) Then
+	If (B == C) Then
+		Declare TestIf as Integer;
+	Else
+		Declare TestElse as Integer;
+	EndIf
+Else
+	B:=B+C;
+EndIf
+End
+$

@@ -1,0 +1,13 @@
+Program TestP
+Begin
+	Declare I,J as Integer;
+	Declare A as Float;
+	Declare B as Integer;
+	FOR	(I:=1 To 100*J Step 5)
+		B:=A+B*2;
+	EndFor
+	
+	FOR (I:=100*J+1 DownTo 1 Step 5)
+		A:=A+B*3;
+	EndFor
+End

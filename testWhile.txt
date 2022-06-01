@@ -1,0 +1,9 @@
+Program P
+Begin
+Declare I as Integer;
+Declare A,B,C as Integer;
+While(I<100)
+	A:=A+B;
+	B:=B+C;
+EndWhile
+End
